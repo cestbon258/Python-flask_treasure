@@ -1,0 +1,81 @@
+{% extends 'layout.html' %}
+
+{% block js %}
+
+<script>
+  $(document).ready(function(){
+      $('#panel').DataTable();
+      $('#essay').DataTable();
+      // document.getElementById("panel").DataTable();
+  });
+</script>
+{% endblock %}
+
+{% block body %}
+  <h1>Dashboard <small> Welcome {{session.username}}</small></h1>
+<!-- Plan one  -->
+  <!-- <a class="btn btn-success" href="/add_shop"> Add Shop</a>&nbsp;&nbsp;
+  <a class="btn btn-success" href="/add_article"> Add Article</a> -->
+  <hr>
+
+<!-- Plan one -->
+  <div>
+    <center><h2>ARTICLES</h2></center>
+    <table id="essay" class="table table-striped">
+      <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Date</th>
+            <th></th>
+            <th></th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for article in articles %}
+            <tr>
+              <td>{{article.id}}</td>
+              <td>{{article.title}}</td>
+              <td>{{article.author}}</td>
+              <td>{{article.create_date}}</td>
+              <td><a href="edit_article/{{article.id}}" class="btn btn-default pull-right">Edit</a></td>
+              <td>
+                <form action="{{url_for('delete_article', id=article.id)}}" method="post">
+                  <input type="hidden" name="_method" value="DELETE">
+                  <input type="submit" value="Delete" class="btn btn-danger">
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+  </div>
+
+<hr>
+
+<!-- Plan two -->
+  <div>
+    <center><h2>STORES</h2></center>
+    <table id="panel" class="display">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Edit mode</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for u in users %}
+            <tr>
+                <td>{{u.id}}</td>
+                <td>{{u.username}}</td>
+                <td>{{u.email}}</td>
+                <td><a href="#">Add Shop</a> | <a href="/add_article">Add Article</a> | <a href="/user/{{u.id}}">View details</a> | <a href="#" onclick="return confirm('Are you sure to delete?')">Delete</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+  </div>
+{% endblock %}

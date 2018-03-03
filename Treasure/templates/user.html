@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}3
+
+{% block js %}
+<script>
+  $(document).ready(function(){
+      $('#panel').DataTable();
+      // document.getElementById("panel").DataTable();
+  });
+</script>
+{% endblock %}
+
+
+{% block body %}
+<!-- {{info}} -->
+  <h1>Details <small> Welcome {{session.username}}</small></h1>
+  <a class="btn btn-success" href="/add_shop"> Add Shop</a>&nbsp;&nbsp;
+  <a class="btn btn-success" href="/add_article"> Add Article</a>
+  <hr>
+
+  <table id="panel" class="display">
+      <thead>
+          <tr>
+              <th>Store ID</th>
+              <th>Store Name</th>
+              <th>Contact</th>
+              <th>Address</th>
+              <th>Edit mode</th>
+          </tr>
+      </thead>
+      <tbody>
+        {% for temp in info %}
+            <tr>
+                <td>{{temp.id}}</td>
+                <td>{{temp.name}}</td>
+                <td>{{temp.contact}}</td>
+                <td>{{temp.address}}</td>
+                <td><a href="/">View items</a> | <a href="">View articles</a> | <a href="">View shop</a> | <a href="" onclick="return confirm('Are you sure to delete?')">Delete shop</a></td>
+            </tr>
+        {% endfor %}
+      </tbody>
+  </table>
+{% endblock %}

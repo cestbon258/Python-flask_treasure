@@ -1,0 +1,134 @@
+/* home page */
+.bgimg-1 {
+	background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image:url("/static/images/1.jpg");
+    opacity: 0.75;
+    height: 50%;
+		border-radius: 4px;
+}
+.bar {
+    box-shadow: 0px 6px 12px 0px #00000073;;
+}
+.button-1 {
+	border-radius: 0 4px 4px 0;
+    border: 0;
+    background: #d32323;
+    box-shadow: none;
+    /*padding: 12px 29px;*/
+    cursor: pointer;
+    height: 44px;
+    width: 44px;
+}
+.button-1:hover {
+    background: red;
+}
+.search-label {
+    font-weight: bold;
+    margin-right: 12px;
+    color: #666;
+    display: inline-block;
+    height: 44px;
+    line-height: 44px;
+    vertical-align: top;
+    overflow: hidden;
+}
+.text-bar {
+	font-size: 18px;
+    border: 0;
+    outline: none;
+    padding: 0;
+    line-height: 44px;
+    height: 44px;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+/* navigation bar */
+.nav-bar {
+    width: 100%;
+    background-color: white;
+    padding-bottom: 40px;
+    position: relative;
+}
+.nav-bar-link {
+	border-radius: 0;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 4px;
+    display: block;
+    cursor: pointer;
+    font-size: 16px;
+}
+.nav-bar-link:hover {
+	border-bottom: 2px solid;
+}
+a {
+ text-decoration: none !important;
+}
+.nav-button:hover {
+	background-color: green;
+}
+.nav-button {
+	border: 2px solid ;
+	border-radius: 4px;
+	padding-bottom: 4px;
+    display: block;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* article page */
+.time-display {
+	float: right;
+}
+
+/* Individual store page */
+.shop-left-bar{
+	background-color: ghostwhite;
+	padding-top: 18px;
+}
+
+.p-card {
+	width: 150px;
+	height: 150px;
+	/* background-image: url(""); */
+	object-fit: contain;
+	border: 2px solid honeydew;
+	border-radius: 4px;
+}
+
+		/* a set of social images */
+#i-format {
+	list-style: none;
+	display: inline-flex;
+	padding: 2px 0 12px 0;
+}
+
+#i-format2 {
+	list-style: none;
+	padding: 0 0 0 0;
+}
+
+#i-right {
+	padding-right: 12px;
+}
+
+.i-set {
+	width: 32px;
+	height: 32px;
+	background-image:url("/static/images/set.jpeg");
+	background-size: cover;
+
+}
+
+#i-c {
+	background-position: -33px -62px ;
+}
+#i-p {
+	background-position: -33px 3px ;
+}
+#i-a {
+	background-position: -33px -90px ;
+}

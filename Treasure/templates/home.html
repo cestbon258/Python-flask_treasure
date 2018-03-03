@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <div class="jumbotron text-center">
+    <h2>Welcome To <strong>Treasure</strong></h2>
+    <p class="lead">The book is the ladder of the progress of mankind</p>
+    <p class="lead">-Maxim Gorky</p>
+    {% if session.logged_in == NULL %}
+      <a href="/register" class="btn btn-primary btn-lg">Register</a>
+      <a href="/login" class="btn btn-success btn-lg">Login</a>
+    {% endif %}
+  </div>
+<!-- search bar -->
+	<div class="bgimg-1">
+		<div style="padding: 18%;">
+			<form action="" method="POST">
+          <div style="background-color: white; border-radius: 4px;">
+              <div class="bar">
+                  <span class="search-label" style="position:absolute; padding-left: 15px;">Find</span>
+                  <div>
+                      <div style="padding-left:64px; display:inline-block; width:100%">
+                              <input class="text-bar" style="width:100%; position:relative; border-radius: 4px;" type="text" name="query" value={{request.form.query}}></input>
+                      </div>
+                  </div>
+                  <button type="submit" class="button-1" style="width:48px; position:relative; float: right; margin-top: -44px;"><img src="static/images/search.svg" style="width: 50%;" ></button>
+              </div>
+          </div>
+      </form>
+		</div>
+	</div>
+{% endblock %}

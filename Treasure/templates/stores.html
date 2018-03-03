@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <h1>Stores</h1>
+  {% for store in stores %}
+    <div class="card" style="display:inline-block; padding-right:18px;">
+      <a href="store/{{store.id}}"><img class="card-img-top" src="/static/images/profile_img/{{store.id}}.png" alt="shop image cap"></a>
+      <div class="card-body">
+        <p class="card-text"><strong>{{store.name}}</strong></p>
+        <!-- <p class="card-text">{{store.profile}}</p> -->
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}

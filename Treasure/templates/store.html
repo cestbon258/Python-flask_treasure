@@ -1,0 +1,94 @@
+{% extends 'layout.html' %}
+
+{% block js %}
+<script>
+  var a = document.getElementById("getURL").innerHTML = window.location.href;
+  console.log(a);
+</script>
+{% endblock %}
+
+{% block body %}
+
+  <div class="row">
+    <!-- {{info}} -->
+    <!-- {{books}} -->
+    {% for b in info %}
+      <div class="col-sm-3 shop-left-bar">
+        <div>
+          <img class="p-card" src="/static/images/profile_img/{{b.id}}.png">
+          <center><h2>{{b.name}}</h2></center>
+        </div>
+        <div>
+          <center>
+            <ul id="i-format">
+              <li id="i-right"><a href="https://www.facebook.com/sharer/sharer.php?u={{URL}}"><img src="/static/images/icons/fb.png"></a></li>
+              <li id="i-right"><a href="https://plus.google.com/share?url={{URL}}"><img src="/static/images/icons/gplus.png"></a></li>
+              <!-- <li><a href=""><img src="/static/images/icons/ig.png"></a></li> -->
+            </ul>
+            <span id="getURL" placeholder="{{URL}}"></span>
+            <!-- <span id="getURL"></span> -->
+            <!-- <i ></i> -->
+          </center>
+          <br>
+          <ul id="i-format2">
+            {% if b.profile %}
+              <li class="i-set" id="i-p"></li>
+              <li>{{b.profile}}</li>
+            {% endif %}
+            <!-- <li id="i-right"><img src="/static/images/icons/fb.png"></li> -->
+          </ul>
+          <ul id="i-format2">
+            {% if b.contact %}
+              <li class="i-set" id="i-c"></li>
+              <li><p>{{b.contact}}</li>
+            {% endif %}
+          </ul>
+          <ul id="i-format2">
+            {% if b.address %}
+              <li class="i-set" id="i-a"></li>
+              <li>{{b.address}}</li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    {% endfor %}
+    {% for book in books %}
+      <div class="col-sm-9">
+        <div display="display:inline-block; background-color: ivory;">
+          <div class="card" style="padding:0 12px 24px 12px; border-radius: 4px; display: inline-grid;">
+            <img class="card-img-top" style="border-radius: 4px;" src="/static/images/book/{{book.id}}.png" alt="book image">
+            <span class="card-text">
+              <center>
+                <button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</button>
+                <a href="#" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-heart-empty"></span>Like</a>
+              </center>
+            </span>
+            <!-- <div class="card-body">
+
+            </div> -->
+          </div>
+          <div style="display: inline-block; vertical-align: top;">
+            <a href="{{URL}}{{book.id}}"><span><h3>{{book.book_name}}</h3></span></a>
+            <ul id="i-format2">
+              {% if book.author %}
+                <li><span><strong>Author: </strong></span>{{book.author}}</li>
+              {% endif %}
+              {% if book.publisher %}
+                <li><span><strong>Publisher: </strong></span> {{book.publisher}}</li>
+              {% endif %}
+              {% if book.issue_date %}
+                <li><span><strong>Date of Issue: </strong></span> {{book.issue_date}}</li>
+              {% endif %}
+            </ul>
+            {% if book.price %}
+              <span class="glyphicon glyphicon-usd"><strong>{{book.price}}</strong></span>
+            {% endif %}
+          <!-- To seprate two div   -->
+            <hr>
+
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

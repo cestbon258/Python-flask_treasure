@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <div  align="right" style="color: grey;"><a href="/user/{{name.id}}" >store</a> |<span class="active" >add shop</span></div>
+  <form method="POST" action="{{url_for('create_shop', id=name.id)}}">
+  	<div class="form-group">
+     	<label>Username:</label>
+      <input type="text" class="form-control" disabled="disabled" value="{{name.name}}">
+  	</div>
+  	<div class="form-group">
+     	<label>Store Name:<span style="color:red;">*<span></label>
+     	<input type="text"  class="form-control" placeholder="Your store name" name="s_name" value={{request.form.s_name}}>
+  	</div>
+  	<div class="form-group">
+     	<label>Contact:<span style="color:red;">*<span></label>
+     	<input type="text"  class="form-control" placeholder="Leave your contact here" name="s_contact" value={{request.form.s_contact}}>
+  	</div>
+  	<div class="form-group">
+     	<label>Profile:<span style="color:red;">*<span></label>
+     	<textarea class="form-control" rows="5" placeholder="Say something about you store here" name="s_profile" value={{request.form.s_profile}}></textarea>
+  	</div>
+  	<div class="form-group">
+     	<label>Address: <span style="color:grey;">(Optional)<span></label>
+     	<textarea class="form-control" rows="5" placeholder="Physical Location" name="s_address" value={{request.form.s_address}}></textarea>
+  	</div>
+    <input class="btn btn-primary" value="Save" type="submit">
+  </form>
+{% endblock %}
+{% block js %}
+  <script>
+
+  </script>
+{% endblock %}

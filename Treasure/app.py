@@ -259,11 +259,15 @@ def user(id):
     cur = mysql.connection.cursor()
 
     # Get user info by user ID
-    result = cur.execute("SELECT * FROM stores  WHERE user_id = %s", [id])
+    result = cur.execute("SELECT stores.id, stores.name, stores.profile, stores.contact, stores.address FROM stores  WHERE user_id = %s", [id])
 
     info = cur.fetchall()
 
-    return render_template('user.html', info=info)
+    result = cur.execute("SELECT id, name FROM users  WHERE id = %s", [id])
+
+    UserInfo = cur.fetchone()
+
+    return render_template('user.html', info=info, UserInfo=UserInfo)
 
 
 # Add Article
@@ -353,6 +357,214 @@ def delete_article(id):
     flash('Article Deleted', 'success')
 
     return redirect(url_for('dashboard'))
+
+
+# Delete user
+@app.route('/delete_user/<string:id>', methods=['POST'])
+@is_logged_in
+def delete_user(id):
+    # Create cursor
+    cur = mysql.connection.cursor()
+
+    # Execute
+    cur.execute("DELETE FROM users WHERE id = %s", [id])
+
+    # Commit to DB
+    mysql.connection.commit()
+
+    #Close connection
+    cur.close()
+
+    flash('User Deleted', 'success')
+
+    return redirect(url_for('dashboard'))
+
+
+# Delete user
+@app.route('/delete_item/<string:id>', methods=['POST'])
+@is_logged_in
+def delete_item(id):
+    # Create cursor
+    cur = mysql.connection.cursor()
+
+    # Execute
+    cur.execute("DELETE FROM books WHERE id = %s", [id])
+
+    # Commit to DB
+    mysql.connection.commit()
+
+    #Close connection
+    cur.close()
+
+    flash('Book item Deleted', 'success')
+
+    return redirect(url_for('dashboard'))
+
+# Delete shop
+@app.route('/delete_shop/<string:id>', methods=['POST'])
+@is_logged_in
+def delete_shop(id):
+    # Create cursor
+    cur = mysql.connection.cursor()
+
+    # Execute
+    cur.execute("DELETE FROM stores WHERE id = %s", [id])
+
+    # Commit to DB
+    mysql.connection.commit()
+
+    #Close connection
+    cur.close()
+
+    flash('Shop have been Deleted', 'success')
+
+    return redirect(url_for('dashboard'))
+# @app.route('/add_shop/')
+# def add_store():
+#     return render_template('add_shop.html')
+
+
+
+#Add store
+@app.route('/add_shop/<string:id>', methods=['GET', 'POST'])
+@is_logged_in
+def add_shop(id):
+
+        # Create cursor
+        cur = mysql.connection.cursor()
+
+        #Get user info
+        result = cur.execute("SELECT id, name FROM users WHERE id = %s", [id])
+
+        name = cur.fetchone()
+        cur.close()
+        return render_template('add_shop.html', name=name)
+
+
+
+@app.route('/create_shop/<string:id>', methods=['GET', 'POST'])
+@is_logged_in
+def create_shop(id):
+        if request.method == 'POST':
+            # Get keyword (query)
+            name = request.form['s_name']
+            contact = request.form['s_contact']
+            profile = request.form['s_profile']
+            address = request.form['s_address']
+
+            # Create Cursor
+            cur = mysql.connection.cursor()
+
+            # Execute query
+            cur.execute("INSERT INTO stores(name, contact, profile, address, user_id) VALUES(%s, %s, %s, %s, %s)", (name, contact, profile, address, id))
+
+            # Commit to DB
+            mysql.connection.commit()
+
+            # Close connection
+            cur.close()
+
+
+        flash('Shop have been created', 'success')
+
+        return redirect(url_for('dashboard'))
+
+@app.route('/change_item/<string:id>', methods=['GET', 'POST'])
+@is_logged_in
+def change_item(id):
+        if request.method == 'POST':
+            # Get keyword (query)
+
+            name = request.form['b_name']
+            author = request.form['author']
+            pub = request.form['pub']
+            date = request.form['date']
+            price = request.form['price']
+
+
+
+
+            # Create Cursor
+            cur = mysql.connection.cursor()
+
+            # Execute query
+            cur.execute("INSERT INTO books( book_name, author, publisher, issue_date, price, store_id) VALUES(%s, %s, %s, %s, %s, %s)", (name, author, pub, date, price, id))
+
+            # Commit to DB
+            mysql.connection.commit()
+
+            # Close connection
+            cur.close()
+
+
+        flash('Item change have been saved', 'success')
+
+        return redirect(url_for('dashboard'))
+
+
+
+
+#view shop
+@app.route('/view_shop/<string:id>')
+@is_logged_in
+def view_shop(id):
+
+	# Create cursor
+	cur = mysql.connection.cursor()
+
+    #Get user info
+	result = cur.execute("SELECT * FROM stores WHERE id = %s", [id])
+
+	shopInfo = cur.fetchone()
+	cur.close()
+
+	return render_template('view_shop.html', shopInfo=shopInfo)
+
+
+
+
+#view item
+@app.route('/view_item/<string:id>')
+@is_logged_in
+def view_item(id):
+
+	# Create cursor
+	cur = mysql.connection.cursor()
+
+	result = cur.execute("SELECT * FROM books WHERE store_id = %s", [id])
+
+	items = cur.fetchall()
+
+	result = cur.execute("SELECT user_id, name FROM stores WHERE id = %s", [id])
+
+	name = cur.fetchone()
+
+	cur.close()
+
+	return render_template('view_item.html', items=items, name=name)
+
+
+@app.route('/edit_item/<string:id>')
+@is_logged_in
+def edit_item(id):
+
+	# Create cursor
+	cur = mysql.connection.cursor()
+
+    #Get user info
+	result = cur.execute("SELECT * FROM books LEFT JOIN categories ON categories.id = books.category_id WHERE books.id = %s", [id])
+
+	itemInfo = cur.fetchall()
+	result = cur.execute("SELECT * FROM categories")
+
+	cate = cur.fetchall()
+
+
+	cur.close()
+
+	return render_template('edit_item.html', itemInfo=itemInfo, cate=cate)
+
+
 
 if __name__ == '__main__':
     app.secret_key='secret123'

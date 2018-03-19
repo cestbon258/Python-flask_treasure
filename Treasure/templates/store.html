@@ -2,8 +2,35 @@
 
 {% block js %}
 <script>
-  var a = document.getElementById("getURL").innerHTML = window.location.href;
+  var a = document.getElementById("getURL").value = window.location.href;
   console.log(a);
+  function DuplicateURL() {
+    var copyText = document.getElementById("getURL");
+    copyText.select();
+    document.execCommand("Copy");
+    alert("Copied the URL: " + copyText.value);
+  }
+
+  $("#getURL").click(function(){
+    $(this).select();
+    document.execCommand("Copy");
+  });
+
+  var x = document.URL;
+  // $("#test").html(x);
+  // console.log($("#test").html(x));
+  $("#fb").attr('href', 'https://www.facebook.com/sharer/sharer.php?u='+x);
+  $("#gplus").attr('href', 'https://plus.google.com/share?url='+x);
+  console.log($("#test").attr('href', 'https://plus.google.com/share?url='+ x));
+
+  $(".like").click(function(){
+    $(this).css('color', 'red');
+  });
+
+  $(".like").dblclick(function(){
+    $(this).css('color', 'grey');
+  });
+
 </script>
 {% endblock %}
 
@@ -21,11 +48,15 @@
         <div>
           <center>
             <ul id="i-format">
-              <li id="i-right"><a href="https://www.facebook.com/sharer/sharer.php?u={{URL}}"><img src="/static/images/icons/fb.png"></a></li>
-              <li id="i-right"><a href="https://plus.google.com/share?url={{URL}}"><img src="/static/images/icons/gplus.png"></a></li>
+              <li id="i-right"><a id="fb" href="#" target="_blank"><img src="/static/images/icons/fb.png"></a></li>
+              <li id="i-right"><a id="gplus" href="#" target="_blank"><img src="/static/images/icons/gplus.png"></a></li>
               <!-- <li><a href=""><img src="/static/images/icons/ig.png"></a></li> -->
             </ul>
-            <span id="getURL" placeholder="{{URL}}"></span>
+            <!-- <span id="getURL" placeholder="{{URL}}"></span> -->
+            <!-- <input type="text"  placeholder="{{URL}}" value="{{URL}}" id="getURL"> -->
+            <input type="text" id="getURL">
+            <button class="glyphicon glyphicon-copy" onclick="DuplicateURL()"></button>
+
             <!-- <span id="getURL"></span> -->
             <!-- <i ></i> -->
           </center>
@@ -59,8 +90,8 @@
             <img class="card-img-top" style="border-radius: 4px;" src="/static/images/book/{{book.id}}.png" alt="book image">
             <span class="card-text">
               <center>
-                <button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</button>
-                <a href="#" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-heart-empty"></span>Like</a>
+                <button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-shopping-cart"></span> Chat to Buy</button>
+                <button class="btn btn-default btn-sm like"><span class="glyphicon glyphicon-heart-empty"></span>Like</button>
               </center>
             </span>
             <!-- <div class="card-body">

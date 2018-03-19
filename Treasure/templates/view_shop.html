@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<!-- {{shopInfo}} -->
+    <div  align="right" style="color: grey;"><a href="/user/{{shopInfo.user_id}}" >store</a> |<span class="active" >view shop</span></div>
+    <form method="POST" action="">
+      	<div class="form-group">
+         	<label>User ID:</label>
+          <input type="text"  class="form-control" disabled="disabled" value="{{shopInfo.user_id}}">
+      	</div>
+      	<div class="form-group">
+         	<label>Store Name:<span style="color:red;">*<span></label>
+         	<input type="text" class="form-control" value="{{shopInfo.name}}">
+      	</div>
+      	<div class="form-group">
+         	<label>Contact:<span style="color:red;">*<span></label>
+         	<input type="text"  class="form-control" value="{{shopInfo.contact}}">
+      	</div>
+      	<div class="form-group">
+         	<label>Profile:<span style="color:red;">*<span></label>
+         	<textarea class="form-control"  rows="5">{{shopInfo.profile}}</textarea>
+      	</div>
+      	<div class="form-group">
+         	<label>Address: <span style="color:grey;">(Optional)<span></label>
+         	<textarea class="form-control"  rows="5">{{shopInfo.address}}</textarea>
+      	</div>
+        <input class="btn btn-primary" value="Save" type="submit">
+    </form>
+
+
+{% endblock %}
+{% block js %}
+  <script>
+
+  </script>
+{% endblock %}

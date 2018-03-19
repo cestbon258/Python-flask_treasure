@@ -9,11 +9,12 @@
 </script>
 {% endblock %}
 
-
 {% block body %}
 <!-- {{info}} -->
-  <h1>Details <small> Welcome {{session.username}}</small></h1>
-  <a class="btn btn-success" href="/add_shop"> Add Shop</a>&nbsp;&nbsp;
+  <h1>Store <small>own by</small> {{UserInfo.name}} </h1>
+  <hr>
+  <div><center><h1>Store Details</h1></center></div>
+  <a class="btn btn-success" href="/add_shop/{{UserInfo.id}}"> Add Shop</a>&nbsp;&nbsp;
   <a class="btn btn-success" href="/add_article"> Add Article</a>
   <hr>
 
@@ -34,7 +35,15 @@
                 <td>{{temp.name}}</td>
                 <td>{{temp.contact}}</td>
                 <td>{{temp.address}}</td>
-                <td><a href="/">View items</a> | <a href="">View articles</a> | <a href="">View shop</a> | <a href="" onclick="return confirm('Are you sure to delete?')">Delete shop</a></td>
+                <td>
+                  <a href="/view_item/{{temp.id}}" class="btn btn-default" role="button">View items</a>
+                  <a href="/view_shop/{{temp.id}}" class="btn btn-default" role="button">View shop</a>
+
+                  <form style="display: inline-block;" action="{{url_for('delete_shop', id=temp.id)}}" method="post">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="submit" value="Delete shop" onclick="return confirm('Are you sure to delete this user?')" class="btn btn-danger">
+                  </form>
+                </td>
             </tr>
         {% endfor %}
       </tbody>

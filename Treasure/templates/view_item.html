@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}3
+
+{% block js %}
+<script>
+  $(document).ready(function(){
+      $('#panel').DataTable();
+      // document.getElementById("panel").DataTable();
+  });
+</script>
+{% endblock %}
+
+{% block body %}
+<!-- {{name}}
+{{items}} -->
+  <div  align="right" style="color: grey;"><a href="/user/{{name.user_id}}" >store</a> |<span class="active" >view items</span></div>
+  <h1>Store <small>named</small> {{name.name}}  </h1>
+  <hr>
+  <div><center><h1>All Items</h1></center></div>
+
+  <hr>
+
+  <table id="panel" class="display">
+      <thead>
+          <tr>
+              <th>Item ID</th>
+              <th>Book Name</th>
+              <th>Author</th>
+              <th>Price</th>
+              <th>Issued Date</th>
+              <th>Edit mode</th>
+
+          </tr>
+      </thead>
+      <tbody>
+        {% for temp in items %}
+            <tr>
+                <td>{{temp.id}}</td>
+                <td>{{temp.book_name}}</td>
+                <td>{{temp.author}}</td>
+                <td>{{temp.price}}</td>
+                <td>{{temp.issue_date}}</td>
+                <td>
+                  <a href="/edit_item/{{temp.id}}" class="btn btn-default" role="button">Edit item</a>
+                  <form style="display: inline-block;" action="{{url_for('delete_item', id=temp.id)}}" method="post">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="submit" value="Delete Item" onclick="return confirm('Are you sure to delete this user?')" class="btn btn-danger">
+                  </form>
+                </td>
+            </tr>
+        {% endfor %}
+      </tbody>
+  </table>
+{% endblock %}

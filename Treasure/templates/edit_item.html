@@ -10,32 +10,33 @@
 
       <div class="form-group">
         <label>Category:<span style="color:red;">*<span> </label>
-          <select class="form-control">
+          <select class="form-control" name="cate" >
             {% for temp in cate %}
-                <option {% if temp.category == i.category %} selected disabled="disabled" {% endif %}>{{temp.category}}</option>
+                <option {% if temp.category == i.category %} selected  disabled="disabled" {% endif %}>{{temp.category}}</option>
 
             {% endfor %}
           </select>
       </div>
+      <input type="hidden" value="{{i.store_id}}" name="store_id">
     	<div class="form-group">
        	<label>Book Name:<span style="color:red;">*<span> </label>
-        <input type="text" class="form-control" placeholder="{{i.book_name}}" name="b_name" value={{request.form.b_name}} >
+        <input type="text" class="form-control" name="b_name" value={{i.book_name}} >
     	</div>
     	<div class="form-group">
        	<label>Author:<span style="color:red;">*<span></label>
-       	<input type="text" class="form-control" placeholder="{{i.author}}"  name="author" value={{request.form.author}}>
+       	<input type="text" class="form-control" name="author" value={{i.author}}>
     	</div>
       <div class="form-group">
         <label>Publisher:<span style="color:red;">*<span> </label>
-        <input type="text" class="form-control" placeholder="{{i.publisher}}"  name="pub" value={{request.form.pub}}>
+        <input type="text" class="form-control" name="pub" value={{i.publisher}}>
       </div>
       <div class="form-group">
         <label>Isuued Date:<span style="color:red;">*<span></label>
-        <input type="text" class="form-control" placeholder="{{i.issue_date}}"  name="date" value={{request.form.date}}>
+        <input type="text" class="form-control" name="date" value={{i.issue_date}}>
       </div>
       <div class="form-group">
         <label>price:<span style="color:red;">*<span></label>
-        <input type="text" class="form-control" placeholder="{{i.price}}"  name="price" value={{request.form.price}}>
+        <input type="text" class="form-control" name="price" value={{i.price}}>
       </div>
       <input class="btn btn-primary" value="Save" type="submit">
       {% else %}

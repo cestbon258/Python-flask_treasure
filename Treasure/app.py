@@ -474,6 +474,8 @@ def create_shop(id):
 def change_item(id):
         if request.method == 'POST':
             # Get keyword (query)
+            store_id = request.form['store_id']
+            # cate = request.form['cate']
 
             name = request.form['b_name']
             author = request.form['author']
@@ -488,7 +490,7 @@ def change_item(id):
             cur = mysql.connection.cursor()
 
             # Execute query
-            cur.execute("INSERT INTO books( book_name, author, publisher, issue_date, price, store_id) VALUES(%s, %s, %s, %s, %s, %s)", (name, author, pub, date, price, id))
+            cur.execute("INSERT INTO books( book_name, author, publisher, issue_date, price, store_id) VALUES(%s, %s, %s, %s, %s, %s)", (name, author, pub, date, price, store_id))
 
             # Commit to DB
             mysql.connection.commit()

@@ -567,5 +567,5 @@ def edit_item(id):
 
 
 if __name__ == '__main__':
-    app.secret_key='secret123'
+    app.secret_key='treasure'
     app.run(debug=True)

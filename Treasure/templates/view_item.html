@@ -43,7 +43,7 @@
                   <a href="/edit_item/{{temp.id}}" class="btn btn-default" role="button">Edit item</a>
                   <form style="display: inline-block;" action="{{url_for('delete_item', id=temp.id)}}" method="post">
                     <input type="hidden" name="_method" value="DELETE">
-                    <input type="submit" value="Delete Item" onclick="return confirm('Are you sure to delete this user?')" class="btn btn-danger">
+                    <input type="submit" value="Delete Item" onclick="return confirm('Are you sure to delete this item?')" class="btn btn-danger">
                   </form>
                 </td>
             </tr>

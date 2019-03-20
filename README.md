@@ -1,2 +1,6 @@
 # treasure
-This repository is created for 205 CDE, written in Python
+> To run this on your machine, you must go through a few installations first.
+
+
+1. Python: https://www.python.org/downloads/
+2. Flask: http://flask.pocoo.org/ 
